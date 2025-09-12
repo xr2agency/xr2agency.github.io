@@ -390,6 +390,76 @@
   color: #00bfa5;
   outline: none;
 }
+    /* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(18,18,18,0.95);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 8%;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00ffc8;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li a {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #eee;
+  transition: color 0.3s ease;
+}
+.nav-links li a:hover {
+  color: #00ffc8;
+}
+
+/* Hamburger (hidden on desktop) */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mobile Menu */
+@media (max-width: 900px) {
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    flex-direction: column;
+    background: #181818;
+    width: 220px;
+    height: calc(100vh - 70px);
+    padding: 40px 20px;
+    gap: 20px;
+    transition: right 0.3s ease;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
 
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -397,6 +467,24 @@
 <body>
 
   <header>
+    <nav class="navbar">
+  <div class="logo">Xpert Results</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#founder">Founder</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Toggle menu">
+    <!-- SVG Hamburger Icon -->
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00ffc8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
+    </nav>
     <img src="img.jpg" alt="XR2 Logo" />
     <h1>XR2 Agency</h1>
     <p>Copywriting & Creative Design Studio. We craft words that sell and visuals that captivate.</p>
@@ -501,13 +589,21 @@
     </a>
   </div>
 </section>
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
 
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
 
   </main>
 
   <footer>
     &copy; 2025 XR2 Agency. All rights reserved.
   </footer>
+  
 
 </body>
 </html>
