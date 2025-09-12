@@ -1,611 +1,416 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>XR2 Agency - Copy & Design Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XR2 — Creative & Tech Design</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
   <style>
-    /* Reset & base */
-    *, *::before, *::after {
-      box-sizing: border-box;
+    :root{
+      --bg:#07060a;
+      --card:#0f1220;
+      --muted:#c7c7d2;
+      --accent1: #6ee7ff; /* cyan */
+      --accent2: #a78bfa; /* purple */
+      --glass: rgba(255,255,255,0.04);
+      --radius: 14px;
     }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #121212;
-      color: #eee;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    a {
-      color: #00ffc8;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    a:hover {
-      color: #00bfa5;
-    }
-
-    /* Container */
-    .container {
-      width: min(90%, 1100px);
-      margin: 0 auto;
-      padding: 40px 0;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(167,139,250,0.06), transparent),
+                  radial-gradient(900px 500px at 90% 90%, rgba(110,231,255,0.04), transparent),
+                  var(--bg);
+      color:#e9eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
     }
 
-    /* Header */
-    header {
-      background: linear-gradient(135deg, #090909 0%, #0f2027 100%);
-      padding: 140px 20px 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    /* sticky navbar */
+    nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:12px 28px;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+      border-bottom:1px solid rgba(255,255,255,0.03);
     }
-    header::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -25%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, #00ffc8 20%, transparent 70%);
-      opacity: 0.15;
-      filter: blur(120px);
-      z-index: 0;
-      animation: pulse 8s infinite alternate ease-in-out;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
-    @keyframes pulse {
-      0% {opacity: 0.15;}
-      100% {opacity: 0.3;}
+    .logo{
+      width:74px;height:74px;border-radius:100%;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Bebas Neue',sans-serif;color:#07060a;
+      font-size:20px;letter-spacing:1px;
+      box-shadow:0 6px 20px rgba(167,139,250,0.12), 0 4px 10px rgba(110,231,255,0.04);
     }
+    .nav-links{display:flex;gap:18px;align-items:center}
+    .nav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+    .nav-cta{padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#07060a;font-weight:700;text-decoration:none}
 
-    header img {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 5px solid #00ffc8;
-      object-fit: cover;
-      margin-bottom: 30px;
-      position: relative;
-      z-index: 1;
+    /* hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:28px;
+      align-items:center;
+      padding:80px 24px 40px;
+      max-width:1200px;margin:0 auto;
     }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 3.6rem;
-      letter-spacing: 2px;
-      margin-bottom: 16px;
-      z-index: 1;
-      position: relative;
+    .hero-inner{
+      display:flex;gap:28px;align-items:center;justify-content:space-between;
+      flex-wrap:wrap;
     }
-    header p {
-      font-weight: 400;
-      font-size: 1.25rem;
-      max-width: 700px;
-      margin: 0 auto 40px;
-      z-index: 1;
-      position: relative;
-      color: #a0f5e8;
+    .hero-left{
+      max-width:640px;
     }
-    .btn-primary {
-      background: #00ffc8;
-      color: #121212;
-      padding: 16px 48px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-      border: none;
-      box-shadow: 0 6px 15px rgba(0, 255, 200, 0.4);
-      transition: background-color 0.3s ease;
-      position: relative;
-      z-index: 1;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
+    .eyebrow{
+      display:inline-block;
+      padding:6px 10px;border-radius:999px;
+      background:linear-gradient(90deg, rgba(167,139,250,0.12), rgba(110,231,255,0.06));
+      color:var(--accent1);font-weight:700;font-size:13px;margin-bottom:14px;
     }
-    .btn-primary:hover {
-      background: #00bfa5;
+    h1{
+      margin:0 0 12px 0;
+      font-family:'Anton', sans-serif;
+      font-size:44px;
+      line-height:1.02;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      -webkit-background-clip:text;
+      background-clip:text;color:transparent;
+      text-transform:uppercase;
+      letter-spacing:1.6px;
     }
+    p.lead{color:var(--muted);font-size:16px;margin:0 0 20px;}
+    .cta-row{display:flex;gap:14px;align-items:center}
+    .btn-primary{padding:12px 18px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#07060a;font-weight:800;text-decoration:none;box-shadow:0 10px 30px rgba(110,231,255,0.06)}
+    .btn-ghost{padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);color:var(--muted);text-decoration:none;font-weight:600}
 
-    /* Section Titles */
-    h2.section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      text-align: center;
-      color: #00ffc8;
-      margin-bottom: 60px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+    .hero-right{
+      min-width:280px;
+      display:flex;align-items:center;justify-content:center;
     }
+    .hero-card{
+      width:320px;padding:18px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+      text-align:left;
+    }
+    .hero-card h4{margin:0 0 8px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff}
+    .hero-card p{margin:0;color:var(--muted);font-size:14px}
 
-    /* About */
-    #about .about-wrapper {
-      display: flex;
-      gap: 60px;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
+    /* services */
+    .section{padding:48px 22px;max-width:1200px;margin:0 auto}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .service-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;padding:20px;border:1px solid rgba(255,255,255,0.03);
+      box-shadow:0 10px 30px rgba(2,6,23,0.5);
+      transition:transform .28s ease, box-shadow .28s ease;
     }
-    #about .about-text {
-      flex: 1 1 380px;
-      font-size: 1.15rem;
-      color: #c7f8f1;
-      max-width: 600px;
-    }
-    #about .about-img {
-      flex: 1 1 300px;
-      max-width: 350px;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,255,200,0.3);
-      transition: transform 0.3s ease;
-    }
-    #about .about-img img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      aspect-ratio: 4 / 3;
-      filter: drop-shadow(0 4px 8px rgba(0,255,200,0.6));
-    }
-    #about .about-img:hover {
-      transform: scale(1.05);
-    }
+    .service-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(110,231,255,0.06)}
+    .service-icon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+      background:linear-gradient(90deg,var(--accent2),var(--accent1));
+      color:#07060a;font-size:20px}
+    .service-card h3{margin:0 0 8px;font-family:'Bebas Neue',sans-serif;font-size:20px}
+    .service-card p{margin:0;color:var(--muted);font-size:14px}
 
-    /* Services Grid */
-    #services .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-      gap: 40px;
+    /* portfolio */
+    .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .port-item{
+      background:var(--glass);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+      overflow:hidden;position:relative;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;
+      transition:transform .25s ease, box-shadow .25s ease;
     }
-    #services .service-card {
-      background: #181818;
-      border-radius: 20px;
-      padding: 30px 25px;
-      text-align: center;
-      box-shadow: 0 6px 20px rgba(0,255,200,0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: default;
-    }
-    #services .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 14px 30px rgba(0,255,200,0.5);
-    }
-    #services .service-card i {
-      font-size: 3.4rem;
-      margin-bottom: 18px;
-      color: #00ffc8;
-      transition: color 0.3s ease;
-    }
-    #services .service-card:hover i {
-      color: #00bfa5;
-    }
-    #services .service-card h3 {
-      font-weight: 600;
-      font-size: 1.5rem;
-      margin-bottom: 12px;
-      color: #a0f5e8;
-    }
-    #services .service-card p {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: #ccc;
-    }
+    .port-item img{width:100%;height:100%;object-fit:cover;border-radius:10px 10px 0 0;display:block}
+    .port-meta{padding:10px;background:linear-gradient(180deg, rgba(7,6,10,0.0), rgba(7,6,10,0.35));color:#fff;font-size:14px}
+    .port-item:hover{transform:translateY(-6px);box-shadow:0 18px 45px rgba(167,139,250,0.08)}
 
-    /* Selected Work */
-    #work .work-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 24px;
-    }
-    #work .work-item {
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,255,200,0.2);
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      background: #181818;
-    }
-    #work .work-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.3s ease;
-      aspect-ratio: 4 / 3;
-    }
-    #work .work-item:hover img {
-      transform: scale(1.1);
-    }
-    #work .work-item::after {
-      content: attr(data-title);
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(transparent, rgba(0,255,200,0.8));
-      color: #000;
-      padding: 10px 15px;
-      font-weight: 600;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.1rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-    }
-    #work .work-item:hover::after {
-      opacity: 1;
-    }
+    /* why choose us */
+    .kpis{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+    .kpi{min-width:160px;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(167,139,250,0.06), rgba(110,231,255,0.03));text-align:center}
+    .kpi h4{margin:0;color:var(--accent1);font-family:'Bebas Neue',sans-serif;font-size:22px}
+    .kpi p{margin:8px 0 0;color:var(--muted)}
 
-    /* Founder */
-    #founder {
-      margin-top: 80px;
-      background: linear-gradient(135deg, #00ffc8 20%, #007f6d 100%);
-      border-radius: 24px;
-      padding: 60px 40px;
-      color: #040404;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      align-items: center;
-      justify-content: center;
-    }
-    #founder .founder-photo {
-      flex: 0 0 280px;
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,255,200,0.5);
-      transition: transform 0.3s ease;
-      cursor: default;
-    }
-    #founder .founder-photo img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      aspect-ratio: 1 / 1;
-    }
-    #founder .founder-photo:hover {
-      transform: scale(1.05);
-    }
-    #founder .founder-text {
-      flex: 1 1 400px;
-    }
-    #founder .founder-text h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      margin-bottom: 16px;
-      font-weight: 700;
-    }
-    #founder .founder-text p {
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: #0b0b0b;
-      line-height: 1.6;
-    }
+    /* contact */
+    #contact{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:56px 22px 88px}
+    .contact-icons{display:flex;gap:26px;align-items:center;justify-content:center;margin-top:6px}
+    .contact-icons a{width:72px;height:72px;border-radius:16px;background:linear-gradient(90deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:#07060a;font-size:20px;text-decoration:none;box-shadow:0 12px 30px rgba(110,231,255,0.06)}
+    .contact-icons a i{font-size:28px}
+    .contact-note{color:var(--muted);font-size:14px;margin-top:6px}
 
-    /* Contact */
-    #contact {
-      text-align: center;
-      margin: 100px 0 60px;
-    }
-    #contact p {
-      font-size: 1.3rem;
-      margin-bottom: 30px;
-      color: #a0f5e8;
-    }
-    #contact .btn-primary {
-      padding: 16px 48px;
-      font-size: 1.2rem;
-    }
+    footer{padding:30px 20px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.03);}
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 20px 0 40px;
-      color: #555;
-      font-size: 0.9rem;
-      letter-spacing: 0.6px;
+    /* responsive */
+    @media (max-width:880px){
+      h1{font-size:34px}
+      .hero-card{width:100%}
+      .logo{width:48px;height:48px;font-size:18px}
     }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      #about .about-wrapper,
-      #founder {
-        flex-direction: column;
-        text-align: center;
-      }
-      #founder .founder-text {
-        flex: 1 1 100%;
-      }
-      #founder .founder-photo {
-        margin-bottom: 30px;
-      }
+    @media (max-width:520px){
+      .nav-links{display:none}
+      .hero{padding:50px 18px}
+      .hero-inner{flex-direction:column-reverse}
     }
-    #contact {
-  text-align: center;
-}
-
-.btn-primary {
-  background: #00ffc8;
-  color: #040404;
-  border: none;
-  padding: 14px 28px;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 1.2rem;
+    .mobile-menu {
+  display: none;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
-  background: #00bfa5;
-  outline: none;
+@media (max-width: 768px) {
+  .mobile-menu {
+    display: block;
+  }
+  nav ul {
+    display: none; /* hide menu items in mobile */
+  }
 }
-
-.or-separator {
-  margin: 20px 0;
-  font-weight: 600;
-  color: #888;
-  font-size: 1.1rem;
-  position: relative;
-}
-
-.or-separator::before,
-.or-separator::after {
-  content: "";
-  height: 1px;
-  width: 40%;
-  background: #ccc;
-  position: absolute;
-  top: 50%;
-}
-
-.or-separator::before {
-  left: 0;
-}
-
-.or-separator::after {
-  right: 0;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  font-size: 2.2rem;
-}
-
-.social-icons a {
-  color: #00ffc8;
-  transition: color 0.3s ease;
-}
-
-.social-icons a:hover,
-.social-icons a:focus {
-  color: #00bfa5;
-  outline: none;
-}
-    /* Navbar */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(18,18,18,0.95);
-  backdrop-filter: blur(6px);
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 8%;
-  z-index: 1000;
+  padding: 15px 30px;
+  background: #111;
+  color: #fff;
 }
 
-.navbar .logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #00ffc8;
-  letter-spacing: 1px;
-}
-
-.nav-links {
-  list-style: none;
+nav ul {
   display: flex;
-  gap: 30px;
+  list-style: none;
+  gap: 20px;
 }
 
-.nav-links li a {
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
   font-weight: 500;
-  font-size: 1rem;
-  color: #eee;
-  transition: color 0.3s ease;
-}
-.nav-links li a:hover {
-  color: #00ffc8;
 }
 
-/* Hamburger (hidden on desktop) */
-.hamburger {
+.mobile-menu {
   display: none;
-  background: none;
-  border: none;
   cursor: pointer;
 }
 
-/* Mobile Menu */
-@media (max-width: 900px) {
+/* Mobile Styles */
+@media (max-width: 768px) {
   .nav-links {
-    position: fixed;
-    top: 70px;
-    right: -100%;
+    display: none;
     flex-direction: column;
-    background: #181818;
-    width: 220px;
-    height: calc(100vh - 70px);
-    padding: 40px 20px;
-    gap: 20px;
-    transition: right 0.3s ease;
+    gap: 15px;
+    background: #111;
+    padding: 20px;
+    position: absolute;
+    top: 60px;
+    right: 30px;
+    border-radius: 8px;
   }
 
   .nav-links.active {
-    right: 0;
+    display: flex;
   }
 
-  .hamburger {
+  .mobile-menu {
     display: block;
   }
 }
-
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
 
-  <header>
-    <nav class="navbar">
-  <div class="logo">Xpert Results</div>
+  <nav>
+  <div class="logo"><img class="logo" src="img.jpg"></div><h3>XPERT RESULTS</h3>
   <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#founder">Founder</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="hamburger" aria-label="Toggle menu">
-    <!-- SVG Hamburger Icon -->
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00ffc8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
+
+  <!-- Mobile Menu Icon -->
+  <div class="mobile-menu" id="menu-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+      viewBox="0 0 24 24" stroke="currentColor" width="28" height="28">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M4 6h16M4 12h16M4 18h16" />
     </svg>
-  </button>
-    </nav>
-    <img src="img.jpg" alt="XR2 Logo" />
-    <h1>XR2 Agency</h1>
-    <p>Copywriting & Creative Design Studio. We craft words that sell and visuals that captivate.</p>
-    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Work With Us</button>
+  </div>
+</nav>
+
+  <header id="home" class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="eyebrow">Creative • Fast • Results</div>
+        <h1>Words + Design = Impact</h1>
+        <p class="lead">XR2 builds high-converting copy and modern visuals for startups & brands. From product pages to social campaigns — we design for action.</p>
+
+        <div class="cta-row">
+          <a class="btn-primary" href="#contact">Let's Create</a>
+          <a class="btn-ghost" href="#portfolio">View Work</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card">
+          <h4>Start a Project</h4>
+          <p>Free 15-min brand audit • Quick sample deliverables • Dedicated WhatsApp support</p>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <main class="container">
+  <section id="about" class="section">
+    <div style="max-width:900px;margin:0 auto;text-align:center">
+      <h2 style="margin-bottom:8px">About XR2</h2>
+      <p style="color:var(--muted);margin:0 auto;max-width:760px">
+        XR2 is a creative studio blending persuasive copywriting with modern graphic design. We help brands get attention, increase conversions, and build lasting visual identities.
+      </p>
+    </div>
+  </section>
 
-    <section id="about" aria-labelledby="about-title">
-      <h2 id="about-title" class="section-title">About XR2</h2>
-      <div class="about-wrapper">
-        <div class="about-text">
-          <p>
-            At <strong>XR2 Agency</strong>, we believe that compelling stories combined with stunning visuals create brands that thrive. 
-            We blend strategic copywriting and innovative graphic design to bring your business ideas to life. 
-          </p>
-          <p>
-            Serving startups and small businesses, our mission is to help you connect, engage, and convert your audience — all under one roof. 
-            From bold ad campaigns to sleek branding kits, we deliver polished results quickly and affordably.
-          </p>
-          <p>
-            Let us be your partner in crafting your brand’s voice and look, so you can focus on what you do best.
-          </p>
-        </div>
-        <div class="about-img" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="" />
-        </div>
+  <section id="services" class="section">
+    <h2 style="text-align:center">Services</h2>
+    <div class="grid" style="margin-top:22px">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-pen-nib"></i></div>
+        <h3>Copywriting</h3>
+        <p>Ads, product descriptions, landing pages, email campaigns and brand storytelling that converts.</p>
       </div>
-    </section>
 
-    <section id="services" aria-labelledby="services-title">
-      <h2 id="services-title" class="section-title">Our Services</h2>
-      <div class="services-grid">
-        <article class="service-card" aria-label="Copywriting Service">
-          <i class="fas fa-pen-nib" aria-hidden="true"></i>
-          <h3>Copywriting</h3>
-          <p>Crafting persuasive ad copy, product descriptions, websites, email campaigns, and brand stories that convert visitors into customers.</p>
-        </article>
-        <article class="service-card" aria-label="Graphic Design Service">
-          <i class="fas fa-palette" aria-hidden="true"></i>
-          <h3>Graphic Design</h3>
-          <p>Unique logos, eye-catching social media creatives, brochures, packaging design, infographics, posters, and full branding kits to elevate your visual identity.</p>
-        </article>
-        <article class="service-card" aria-label="Content Marketing Service">
-          <i class="fas fa-bullhorn" aria-hidden="true"></i>
-          <h3>Content & Marketing</h3>
-          <p>SEO-focused blogs, presentations, and marketing collateral that speaks directly to your target audience and boosts engagement.</p>
-        </article>
-        <article class="service-card" aria-label="Creative Support Service">
-          <i class="fas fa-lightbulb" aria-hidden="true"></i>
-          <h3>Creative Support</h3>
-          <p>Fast, polished, custom designs for any business need with a professional touch to keep your brand ahead.</p>
-        </article>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-paintbrush"></i></div>
+        <h3>Graphic Design</h3>
+        <p>Logo design, social creative, posters, packaging, brochures — polished visuals for every touchpoint.</p>
       </div>
-    </section>
 
-    <section id="work" aria-labelledby="work-title">
-      <h2 id="work-title" class="section-title">Selected Work</h2>
-      <div class="work-grid" role="list">
-        <div class="work-item" role="listitem" data-title="Branding Project">
-          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Branding Project" />
-        </div>
-        <div class="work-item" role="listitem" data-title="Social Media Campaign">
-          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Social Media Campaign" />
-        </div>
-        <div class="work-item" role="listitem" data-title="Product Packaging">
-          <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=600&q=80" alt="Product Packaging" />
-        </div>
-        <div class="work-item" role="listitem" data-title="Website Design">
-          <img src="1.jpg" alt="Website Design" />
-        </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-bullhorn"></i></div>
+        <h3>Content & Marketing</h3>
+        <p>SEO-friendly blog copy, social strategies, and marketing collateral to amplify your voice.</p>
       </div>
-    </section>
 
-    <section id="founder" aria-labelledby="founder-title">
-     
-      <div class="founder-text">
-        <h3 id="founder-title" class="section-title" style="color:#040404;">Meet the Founder</h3>
-        <h2>Baranivigneshwar B</h2>
-        <p>
-          “XR2 was born from my passion to combine impactful storytelling with striking design. With over 1 years in the creative industry, I’ve built a team that understands how to connect brands with their audience through authentic and memorable experiences.”
-        </p>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-hands-helping"></i></div>
+        <h3>Creative Support</h3>
+        <p>One-off creative packs, brand refreshes and quick-turn design + copy bundles.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact" aria-labelledby="contact-title">
-  <h2 id="contact-title" class="section-title">Contact XR2</h2>
-  <p>Ready to elevate your brand? Let’s collaborate and create something unforgettable.</p>
-  <button class="btn-primary" onclick="window.location.href='mailto:xr2offc@gmail.com'">Email Us</button>
-  
-  <div class="or-separator">or</div>
-  
-  <div class="social-icons" aria-label="Social media links">
-    <a href="https://www.instagram.com/xr2agency" target="_blank" rel="noopener" aria-label="Instagram">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://wa.me/+918838926026" target="_blank" rel="noopener" aria-label="WhatsApp">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-    <a href="https://www.linkedin.com/in/xr2-agency-2b5519383?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener" aria-label="LinkedIn">
-      <i class="fab fa-linkedin-in"></i>
-    </a>
-  </div>
-</section>
-<script>
-  const hamburger = document.querySelector('.hamburger');
-  const navLinks = document.querySelector('.nav-links');
+  <section id="portfolio" class="section">
+    <h2 style="text-align:center">Selected Work </h2>
+    <div class="portfolio-grid">
+      <!-- placeholder images - replace with your screenshots -->
+      <div class="port-item">
+        <img src="5.jpg" alt="Sample 1">
+        <div class="port-meta">Social Post — Café </div>
+      </div>
 
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
-</script>
+      <div class="port-item">
+        <img src="2.jpg" alt="Sample 2">
+        <div class="port-meta">Tech Startup — Landing Mockup</div>
+      </div>
 
-  </main>
+      <div class="port-item">
+        <img src="1.jpg" alt="Sample 3">
+        <div class="port-meta">Ad + Copy — E-commerce (Mock)</div>
+      </div>
+
+      <div class="port-item">
+        <img src="4.jpg" alt="Sample 4">
+        <div class="port-meta">Social Media Caption — Mock</div>
+      </div>
+            <div class="port-item">
+        <img src="3.jpg" alt="Sample 4">
+        <div class="port-meta">Product Description — Mock</div>
+      </div>
+           <div class="port-item">
+        <img src="6.jpg" alt="Sample 5">
+        <div class="port-meta">Website Headline — Mock</div>
+      </div>
+      <div class="port-item">
+        <img src="7.jpg" alt="Sample 918838926026">
+        <div class="port-meta">Coffee Vibes Caption — Mock</div>
+      </div>
+      <div class="port-item">
+        <img src="8.jpg" alt="Sample 7">
+        <div class="port-meta">Ad caption — Mock</div>
+      </div>
+      <div class="port-item">
+        <img src="9.jpg" alt="Sample 8">
+        <div class="port-meta">T-Shirt Product Description — Mock</div>
+      </div>
+      <div class="port-item">
+        <img src="10.jpg" alt="Sample 9">
+        <div class="port-meta">Brand Story — Mock</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:22px">
+      <a class="btn-ghost" href="#contact">Request a Custom Sample</a>
+    </div>
+  </section>
+
+  <section class="section" style="text-align:center">
+    <h2>Why XR2</h2>
+    <div class="kpis" style="margin-top:18px">
+      <div class="kpi"><h4>Fast Turnaround</h4><p>Quick drafts, rapid revisions, and reliable delivery.</p></div>
+      <div class="kpi"><h4>Affordable</h4><p>Startup-friendly pricing with premium outcomes.</p></div>
+      <div class="kpi"><h4>Results Focus</h4><p>Copy + design built to increase engagement and conversions.</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div style="max-width:780px;margin:0 auto;text-align:center;padding:12px 22px">
+      <h2 style="margin-bottom:6px">Get in touch</h2>
+      <p class="contact-note">Book a free 15-min brand audit or request a custom sample pack. We respond within 24 hours.</p>
+
+      <div class="contact-icons" style="margin-top:18px">
+        <a href="mailto:xr2offc@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://instagram.com/xr2agency" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/918838926026" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    &copy; 2025 XR2 Agency. All rights reserved.
+    <div>© <strong>XR2 Agency</strong> — Copywriting & Creative Design</div>
   </footer>
-  
 
-</body>
-</html>
+  <script>
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href');
+        if(href.length>1){
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      })
+    });
+  </script><script>
+  const menuBtn = document.getElementById("menu-btn");
+  const navLinks = document.querySelector(".nav-links");
 
-  
+  menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+</script></body>
+  </html>
